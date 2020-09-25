@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const PORT = 3000;
 const express = require('express');
 const server = express();
@@ -15,16 +17,6 @@ server.use((req, res, next) => {
   
     next();
 });
-
-// server.use('/api', (req, res, next) => {
-//     console.log("A request was made to /api");
-//     next();
-//   });
-  
-// server.get('/api', (req, res, next) => {
-//     console.log("A get request was made to /api");
-//     res.send({ message: "success" });
-//   });
 
 const apiRouter = require('./api');
 server.use('/api', apiRouter);
