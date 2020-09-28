@@ -36,6 +36,13 @@ async function createUser({
         JOIN post_tags ON tags.id=post_tags."tagId"
         WHERE post_tags."postId"=$1;
       `, [postId])
+
+      if (!post) {
+        throw {
+          name: "PostNotFoundError",
+          message: "Could not find a post with that postId"
+        };
+      }
   
       const { rows: [author] } = await client.query(`
         SELECT id, username, name, location
